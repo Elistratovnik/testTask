@@ -1,0 +1,33 @@
+.add-form {
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 24px;
+    border: 1px dashed lightblue;
+    margin-bottom: 24px;
+    border-radius: 16px;
+    background-color: lightyellow;
+}
+
+.filter-form {
+    margin-bottom: 24px;
+}
+
+.add-form .btn {
+    justify-self: start;
+    align-self: center;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-group label {
+    width: 100%;
+}
+
+.form-group small {
+    margin-left: 18px;
+}
