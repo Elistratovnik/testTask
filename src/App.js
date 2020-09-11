@@ -10,9 +10,13 @@ function App() {
     return state.user.id
   })
   
+  const loaded = useSelector((state) => {
+    return state.loaded
+  })
+
   return (
     <div className="App">
-      <FilterForm />
+      {loaded && <FilterForm />}
       <Table />
       {user && <UserCard />}
     </div>

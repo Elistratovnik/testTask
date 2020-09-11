@@ -34,7 +34,7 @@ function AddForm() {
 
         if (!values.email) {
             errors.email = 'Обязательное поле'
-        } else if (!/(([a-z][a-z0-9\-\.]*[a-z0-9])|[a-z])@(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z])\.[a-z]{2,63}(\.[a-z]{2,63})?/.test(values.email)) {
+        } else if (!/(([a-z][a-z0-9\-.]*[a-z0-9])|[a-z])@(([a-z0-9][a-z0-9-]*[a-z0-9])|[a-z]).[a-z]{2,63}(.[a-z]{2,63})?/.test(values.email)) {
             errors.email = 'Неправильный формат почты'
         }
 
@@ -45,7 +45,6 @@ function AddForm() {
     }
 
     const onSubmit = (values, props) => { 
-        console.log(props)
         dispatch(addUser(values))
         props.resetForm()
     }
@@ -55,6 +54,7 @@ function AddForm() {
             initialValues={initialValues}
             validate={validate}
             onSubmit={onSubmit}
+            validateOnMount
         >
             {
                 (formik) => (
@@ -64,7 +64,7 @@ function AddForm() {
                         <FormikControl className="form-control w-50" control="input" type="text" label="Фамилия" name="lastName"/>
                         <FormikControl className="form-control w-50" control="input" type="email" label="Электронная почта" name="email"/>
                         <FormikControl className="form-control w-50" control="input" type="tel" label="Телефон" name="phone"/>
-                        <button type="submit" className="btn btn-primary" disabled={!formik.isValid}>Добавить в таблицу</button>
+                        <button type="submit" className="btn btn-primary" disabled={!(formik.dirty && formik.isValid)}>Добавить в таблицу</button>
                     </Form>
                 )
             }

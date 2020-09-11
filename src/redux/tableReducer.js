@@ -1,28 +1,5 @@
 import { FETCHED_USERS, SORT_BY_ID, SHOW_NEW_PAGE, ADD_USER, SHOW_USERS, UPDATE_PAGINATION, SHOW_ADD_FORM, CHANGE_ADD_FORM_INPUTS_VALUE, SET_INITIAL_ADD_FORM_INPUTS, UPDATE_USER_CONTAINER, RESET_USER_CONTAINER, FILTER_USER_ARRAY, CHANGE_FILTER_FORM_INPUT_VALUE, SHOW_SPINNER, HIDE_SPINNER, DISABLE_BUTTON, ENABLE_BUTTON } from "./types"
-
-const initialState = {
-    allUsersData: [],
-    usersForDisplay: [],
-    arrayForFilter: [],
-    pages: 0,
-    currentPage: 1,
-    fetchBtnDisabled: false,
-    loaded: false,
-    loading: false,
-    addFormVisible: false,
-    user: {
-        id: '',
-        firstName: '',
-        lastName: '',
-        description: '',
-        address: {
-            streetAddress: '',
-			city: '',
-			state: '',
-			zip: ''
-        }
-    }
-}
+import { initialState } from "./initialState"
 
 export function tableReducer (state = initialState, action) {
     switch (action.type) {
@@ -63,7 +40,6 @@ export function tableReducer (state = initialState, action) {
         case RESET_USER_CONTAINER:
             return {...state, user: {id: '', firstName: '', lastName: '', description: '', address: {streetAddress: '', city: '', state: '', zip: ''}}}
         case FILTER_USER_ARRAY:
-            console.log(state.arrayForFilter)
             if (!action.payload) return {...state, allUsersData: state.arrayForFilter}
             const request = new RegExp(action.payload, 'i')
             const result = state.arrayForFilter.filter((user) => {

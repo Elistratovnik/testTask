@@ -14,14 +14,6 @@ function FilterForm() {
         filter: ''
     }
 
-    const validate = (values) => {
-        let errors = {}
-        // if (!values.filter) {
-        //     errors.filter = 'Обязательное поле'
-        // }
-        return errors
-    }
-
     const onSubmit = (values, submitProps) => { 
         dispatch(filterUserArray(values.filter));
         submitProps.resetForm();
@@ -30,7 +22,6 @@ function FilterForm() {
     return (
         <Formik
             initialValues={initialValues}
-            validate={validate}
             onSubmit={onSubmit}
         >
             {

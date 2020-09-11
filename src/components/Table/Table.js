@@ -16,15 +16,16 @@ const Table = ({usersForDisplay, fetchedUsers, pages, loaded, showAddForm, addFo
         <button className="btn btn-success mb-3" onClick={() => {showAddForm()}}>Добавить пользователя</button>
         {addFormVisible && <AddForm />}
         <TableHeading />
+        {(usersForDisplay.length === 0 && loaded) && 'Ничего не найдено =('}
         {usersForDisplay && usersForDisplay.map((user, index, arr) => {
-            return <TableRow updateUserContainer={updateUserContainer} user={arr[arr.length - (index + 1)]}  activeStyle={selectUserId == arr[arr.length - (index + 1)].id && '#28a745'}/>
+            return <TableRow key={index} updateUserContainer={updateUserContainer} user={arr[arr.length - (index + 1)]}  activeStyle={selectUserId === arr[arr.length - (index + 1)].id && '#28a745'}/>
         })}
         {loading && <Spinner />}
         {!loaded && <button className="btn btn-outline-danger mr-3 mt-3" disabled={fetchBtnDisabled} onClick={() => {fetchedUsers()}}>Загрузить 32 пользователя</button>}
         {!loaded && <button className="btn btn-outline-danger mt-3" disabled={fetchBtnDisabled} onClick={() => {fetchedUsers('big')}}>Загрузить 1000 пользователей</button>}
         <div className="table__pagination">
             {pages > 1 && pagesToArray(pages).map((page) => {
-                return <TablePagination page={page}  showUsers={showUsers} active={currentPage === page}/>
+                return <TablePagination key={page} page={page}  showUsers={showUsers} active={currentPage === page}/>
             })}
         </div>
     </section>)

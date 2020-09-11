@@ -1,8 +1,9 @@
 import { FETCHED_USERS, SORT_BY_ID, SHOW_NEW_PAGE, ADD_USER, SHOW_USERS, UPDATE_PAGINATION, SHOW_ADD_FORM, CHANGE_ADD_FORM_INPUTS_VALUE, SET_INITIAL_ADD_FORM_INPUTS, UPDATE_USER_CONTAINER, RESET_USER_CONTAINER, FILTER_USER_ARRAY, CHANGE_FILTER_FORM_INPUT_VALUE, SHOW_SPINNER, HIDE_SPINNER, DISABLE_BUTTON, ENABLE_BUTTON } from "./types"
 
 export function fetchedUsers (big) {
-    const url = big ? 'http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}'
-                    : 'http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}'
+    const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+    const url = big ? protocol + '://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}'
+                    : protocol + '://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}'
     return async (dispatch) => {
         dispatch(disableButton())
         dispatch(showSpinner())
